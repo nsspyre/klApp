@@ -7,6 +7,89 @@
     "web": "expo start --web",
     "eject": "expo eject"
   },
+  "config": {
+    "cz-emoji": {
+      "types": [
+        {
+          "name": "feat:",
+          "emoji": "🍻",
+          "value": ":beers:",
+          "code": ":beers:",
+          "description": "A new feature"
+        },
+        {
+          "name": "fix:",
+          "emoji": "💩",
+          "value": ":poop:",
+          "code": ":poop:",
+          "description": "A bug fix"
+        },
+        {
+          "name": "test:",
+          "emoji": "🚓",
+          "value": ":police_car:",
+          "code": ":police_car:",
+          "description": "Testing improved with new or fixed tests"
+        },
+        {
+          "name": "chore:",
+          "emoji": "🔩",
+          "value": ":nut_and_bolt:",
+          "code": ":nut_and_bolt:",
+          "description": "Doesn't modify src or test files"
+        },
+        {
+          "name": "style:",
+          "emoji": "🎨",
+          "value": ":art:",
+          "code": ":art:️",
+          "description": "Doesn't affect the meaning of the code (white-space, semi-colons, etc)"
+        },
+        {
+          "name": "docs:",
+          "emoji": "📚",
+          "value": ":books:",
+          "code": ":books:",
+          "description": "Documentation change"
+        },
+        {
+          "name": "refactor:",
+          "emoji": "🔧",
+          "value": ":wrench:",
+          "code": ":wrench:",
+          "description": " Neither fixes a bug or adds a feature"
+        },
+        {
+          "name": "perf:",
+          "emoji": "💰",
+          "value": ":moneybag:",
+          "code": ":moneybag:",
+          "description": "Improves performance with this change"
+        },
+        {
+          "name": "build:",
+          "emoji": "🚀",
+          "value": ":rocket:",
+          "code": ":rocket:",
+          "description": "Build system config or external dependencies"
+        },
+        {
+          "name": "ci:",
+          "emoji": "🚥",
+          "value": ":traffic_light:",
+          "code": ":traffic_light:",
+          "description": "CI config files and scripts"
+        },
+        {
+          "name": "revert:",
+          "emoji": "💊",
+          "value": ":pill:",
+          "code": ":pill:",
+          "description": "Reverts a previous commit"
+        }
+      ]
+    }
+  },
   "dependencies": {
     "axios": "^0.19.0",
     "expo": "^35.0.0",
