@@ -11,7 +11,7 @@ import {
 import { Formik } from 'formik';
 
 import styles from './style';
-import { Button } from '@components'
+import { Button, Input } from '@components'
 import { userLogin } from '@state/actions/auth.action';
 import { isAuthLoading, error as authError } from '@state/selectors/auth.selectors';
 import loginSchema from './schema';
@@ -49,7 +49,7 @@ const Login = () => {
           >
             {props => (
               <View style={styles.form}>
-                <TextInput
+                <Input
                   value={props.values.username}
                   onChangeText={props.handleChange('username')}
                   onBlur={props.handleBlur('username')}
@@ -57,7 +57,7 @@ const Login = () => {
                   autoCapitalize="none"
                   placeholder="Username"
                 />
-                <TextInput
+                <Input
                   value={props.values.password}
                   onChangeText={props.handleChange('password')}
                   onBlur={props.handleBlur('password')}
@@ -89,7 +89,7 @@ const Login = () => {
                 <View style={styles.textHolder}>
                   <Text style={styles.registerLabel}>
                     Dont have an account yet?
-                </Text>
+                  </Text>
                   <NaviteButton
                     title="Signup"
                     onPress={() => { }}
