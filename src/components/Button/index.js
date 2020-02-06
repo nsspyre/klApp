@@ -5,15 +5,15 @@ export default ({ style, text, onPress }) => {
     let buttonStyle =
         (
             style ?
-            StyleSheet.flatten([styles.button, style]) :
-            styles.button
+                StyleSheet.flatten([styles.button, style]) :
+                styles.button
         )
 
     return (
         <TouchableOpacity
             style={buttonStyle}
             onPress={onPress}
-            >
+        >
             <Text style={styles.text}>{text}</Text>
         </TouchableOpacity>
     )

@@ -8,11 +8,9 @@ const setNavigator = (nav) => {
     }
 }
 
-const navigate = (routeName, params) => {
+const navigate = (routeName, params = {}) => {
     if (config.navigator && routeName) {
-        let action = NavigationActions.navigate({ routeName, params });
-        console.log('action', action)
-        config.navigator.dispatch(action);
+        config.navigator.dispatch(NavigationActions.navigate({ routeName, params }));
     }
 }
 
