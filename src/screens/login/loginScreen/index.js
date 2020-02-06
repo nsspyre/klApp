@@ -15,7 +15,7 @@ import { userLogin } from '@state/actions/auth.action';
 import useForm from '../../../hooks/useForm';
 import { isAuthLoading, error as authError } from '@state/selectors/auth.selectors';
 
-export default ({ navigation }) => {
+export default () => {
   const dispatch = useDispatch();
 
   const initialState = {
