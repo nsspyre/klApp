@@ -3,11 +3,11 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Provider } from 'react-redux'
 
-import AuthLoading from './src/screens/login/AuthLoading';
-import Products from './src/screens/products/products'
-import Login from './src/screens/login/loginScreen/Login';
-import configureStore from './src/redux/store';
-import * as NavigationService from './src/services/navigation/navigation.service';
+import AuthLoading from '@screens/login/AuthLoading';
+import Products from '@screens/products/products'
+import Login from '@screens/login/loginScreen';
+import configureStore from '@state/store';
+import { NavigationService } from '@services';
 
 const store = configureStore();
 

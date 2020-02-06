@@ -10,10 +10,10 @@ import {
 } from 'react-native';
 
 import styles from './style';
-import { PrimaryBtn } from '../../../components/buttons';
-import { userLogin } from '../../../redux/actions/auth.action';
+import { PrimaryBtn } from '@components';
+import { userLogin } from '@state/actions/auth.action';
 import useForm from '../../../hooks/useForm';
-import { isAuthLoading, error as authError } from '../../../redux/selectors/auth.selectors';
+import { isAuthLoading, error as authError } from '@state/selectors/auth.selectors';
 
 export default ({ navigation }) => {
   const dispatch = useDispatch();
