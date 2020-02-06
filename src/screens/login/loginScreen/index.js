@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import styles from './style';
-import { PrimaryBtn } from '@components';
+import { PrimaryBtn } from '@components'
 import { userLogin } from '@state/actions/auth.action';
 import useForm from '../../../hooks/useForm';
 import { isAuthLoading, error as authError } from '@state/selectors/auth.selectors';

@@ -6,7 +6,7 @@ module.exports = {
       'module-resolver',
       {
         root: ['./src'],
-        extensions: ['.ios.js', '.android.js', '.js', '.json'],
+        extensions: ['.js', '.json'],
         cwd: 'babelrc',
         alias: {
           '@assets': './assets',
