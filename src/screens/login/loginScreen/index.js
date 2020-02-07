@@ -76,6 +76,7 @@ class Login extends Component {
                 <View style={styles.btnHolder}>
                   <Button
                     style={styles.guestBtn}
+                    status="basic"
                     text="Continue as guest"
                   />
                 </View>
@@ -108,7 +109,7 @@ class Login extends Component {
             style={styles.img}
           />
         </View>
-        {renderInputs(loading, error)}
+        {this.renderInputs(loading, error)}
       </View>
     )
   }
