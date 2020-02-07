@@ -1,8 +1,7 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Text,
-  TextInput,
   Button as NaviteButton,
   View,
   Image,
@@ -16,18 +15,13 @@ import { userLogin } from '@state/actions/auth.action';
 import { isAuthLoading, error as authError } from '@state/selectors/auth.selectors';
 import loginSchema from './schema';
 
-const Login = () => {
-  const dispatch = useDispatch();
-
-  const isLoading = useSelector(state => isAuthLoading(state));
-  const error = useSelector(state => authError(state));
-
-  const onSubmit = values => {
+class Login extends Component {
+  onSubmit = values => {
     dispatch(userLogin(values))
   }
 
-  const renderInputs = () => {
-    if (isLoading) {
+  renderInputs = (loading, error) => {
+    if (loading) {
       return (
         <View style={[styles.container, styles.activityHolder]}>
           <ActivityIndicator
@@ -45,7 +39,7 @@ const Login = () => {
               password: ''
             }}
             validationSchema={loginSchema}
-            onSubmit={onSubmit}
+            onSubmit={this.onSubmit}
           >
             {props => (
               <View style={styles.form}>
@@ -103,17 +97,30 @@ const Login = () => {
     }
   }
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.imgContainer}>
-        <Image
-          source={require('../../../../assets/imgs/logo.jpeg')}
-          style={styles.img}
-        />
+  render() {
+    const { loading, error } = this.props;
+
+    return (
+      <View style={styles.container}>
+        <View style={styles.imgContainer}>
+          <Image
+            source={require('../../../../assets/imgs/logo.jpeg')}
+            style={styles.img}
+          />
+        </View>
+        {renderInputs(loading, error)}
       </View>
-      {renderInputs()}
-    </View>
-  )
+    )
+  }
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+  loading: isAuthLoading(state),
+  error: authError(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  userLogin: (values) => dispatch(userLogin(values)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
