@@ -14,10 +14,17 @@ import { Button, Input } from '@components'
 import { userLogin } from '@state/actions/auth.action';
 import { isAuthLoading, error as authError } from '@state/selectors/auth.selectors';
 import loginSchema from './schema';
+import { NavigationService } from '@services';
+import { routesAuth as routes } from '@constants';
 
 class Login extends Component {
   onSubmit = values => {
-    dispatch(userLogin(values))
+    const { userLogin } = this.props;
+    userLogin(values);
+  }
+
+  goToRegister = () => {
+    NavigationService.navigate(routes.AUTH_REGISTER);
   }
 
   renderInputs = (loading, error) => {
@@ -43,23 +50,21 @@ class Login extends Component {
           >
             {props => (
               <View style={styles.form}>
-                <View style={styles.margin}>
-                  <Input
-                    value={props.values.username}
-                    onChangeText={props.handleChange('username')}
-                    onBlur={props.handleBlur('username')}
-                    autoCapitalize="none"
-                    placeholder="Username"
-                    error={error && true}
-                    caption={error ? error : null}
-                    label="Username"
-                  />
-                </View>
+                <Input
+                  value={props.values.username}
+                  onChangeText={props.handleChange('username')}
+                  onBlur={props.handleBlur('username')}
+                  autoCapitalize="none"
+                  placeholder="Username"
+                  error={error && true}
+                  caption={error ? error : null}
+                  label="Username"
+                />
                 <Input
                   value={props.values.password}
                   onChangeText={props.handleChange('password')}
                   onBlur={props.handleBlur('password')}
-                  secureTextEntry={true}
+                  secureTextEntry
                   placeholder="Password"
                   error={error && true}
                   caption={error ? error : null}
@@ -81,7 +86,6 @@ class Login extends Component {
                 </View>
                 <View style={styles.btnHolder}>
                   <Button
-                    style={styles.guestBtn}
                     status="basic"
                     text="Continue as guest"
                   />
@@ -93,7 +97,7 @@ class Login extends Component {
                   </Text>
                   <NaviteButton
                     title="Signup"
-                    onPress={() => { }}
+                    onPress={this.goToRegister}
                   />
                 </View>
               </View>
