@@ -43,21 +43,27 @@ class Login extends Component {
           >
             {props => (
               <View style={styles.form}>
-                <Input
-                  value={props.values.username}
-                  onChangeText={props.handleChange('username')}
-                  onBlur={props.handleBlur('username')}
-                  style={styles.inputs}
-                  autoCapitalize="none"
-                  placeholder="Username"
-                />
+                <View style={styles.margin}>
+                  <Input
+                    value={props.values.username}
+                    onChangeText={props.handleChange('username')}
+                    onBlur={props.handleBlur('username')}
+                    autoCapitalize="none"
+                    placeholder="Username"
+                    error={error && true}
+                    caption={error ? error : null}
+                    label="Username"
+                  />
+                </View>
                 <Input
                   value={props.values.password}
                   onChangeText={props.handleChange('password')}
                   onBlur={props.handleBlur('password')}
-                  style={styles.inputs}
                   secureTextEntry={true}
                   placeholder="Password"
+                  error={error && true}
+                  caption={error ? error : null}
+                  label="Password"
                 />
                 {error && (
                   <View>
