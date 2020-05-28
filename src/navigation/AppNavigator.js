@@ -1,7 +1,7 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { routesProxy, routesAuth, routesProducts } from '@constants';
 
-import Proxy from '@screens/login/Proxy';
+import Proxy from '@screens/Auth/Proxy';
 import AuthStack from './Auth';
 import ProductsStack from './Products';
 
