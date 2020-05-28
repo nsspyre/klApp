@@ -1,5 +1,5 @@
 import { get } from 'lodash';
 
-export const isAuthLoading = state => get(state, 'auth.isLoading');
-export const isAuthLoaded = state => get(state, 'auth.isLoaded');
-export const error = state => get(state, 'auth.error')
+export const isPending = state => get(state, 'auth.pending', false);
+export const error = state => get(state, 'auth.error', null);
+export const hasError = state => get(state, 'auth.error', false) ? true : false;

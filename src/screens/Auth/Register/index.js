@@ -2,16 +2,20 @@ import React, { PureComponent } from 'react';
 import { View } from 'react-native';
 import { Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
+import { connect } from 'react-redux';
 
 import { Input, Button } from '@components';
 import registerSchema from './schema';
 import styles from './styles';
 import { NavigationService } from '@services';
 import { routesAuth as routes } from '@constants'
+import { postUserSignup } from '@state/actions/auth.action';
+import { isPending } from '@state/selectors/auth.selectors';
 
 class Register extends PureComponent {
     onSubmit = values => {
-        console.log('values', values);
+        const { onUserSignup } = this.props;
+        onUserSignup(values);
     }
 
     goToLogin = () => NavigationService.navigate(routes.AUTH_LOGIN);
@@ -46,7 +50,6 @@ class Register extends PureComponent {
                                 autoCapitalize="none"
                                 placeholder="Username"
                                 label="Username"
-                                autoCompleteType="username"
                             />
                             <Input
                                 value={props.values.email}
@@ -82,4 +85,12 @@ class Register extends PureComponent {
     }
 }
 
-export default Register;
+const mapStateToProps = (state) => ({
+    isPending: isPending(state),
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    onUserSignup: (values) => dispatch(postUserSignup(values)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

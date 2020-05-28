@@ -12,7 +12,7 @@ import { Formik } from 'formik';
 import styles from './style';
 import { Button, Input } from '@components'
 import { userLogin } from '@state/actions/auth.action';
-import { isAuthLoading, error as authError } from '@state/selectors/auth.selectors';
+import { isPending, error as authError } from '@state/selectors/auth.selectors';
 import loginSchema from './schema';
 import { NavigationService } from '@services';
 import { routesAuth as routes } from '@constants';
@@ -70,11 +70,11 @@ class Login extends Component {
                   caption={error ? error : null}
                   label="Password"
                 />
-                {error && (
+                {/* {error && error !== '' && (
                   <View>
                     <Text style={styles.errorText}>Oops! {error}</Text>
                   </View>
-                )}
+                )} */}
                 <View>
                   <Text style={styles.passwordText}>forgot password?</Text>
                 </View>
@@ -126,7 +126,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  loading: isAuthLoading(state),
+  loading: isPending(state),
   error: authError(state),
 });
 
