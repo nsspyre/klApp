@@ -1,7 +1,7 @@
 import {
     actionTypes
 } from '@constants';
-
+import { get } from 'lodash';
 
 const initialState = {
     pending: false,
@@ -17,7 +17,7 @@ export default function (state = initialState, action) {
             return { ...state, pending: true };
         case actionTypes.LOGIN_USER_SUCCESS:
         case actionTypes.SIGNUP_USER_SUCCESS:
-            const token = action.result.token;
+            const token = get(action, 'result.token', '');
             return { ...state, pending: false, token };
         case actionTypes.LOGIN_USER_FAIL:
         case actionTypes.SIGNUP_USER_FAIL:
