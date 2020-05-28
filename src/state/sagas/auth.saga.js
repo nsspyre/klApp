@@ -12,7 +12,7 @@ export function* userLogin({ payload }) {
 
         yield put({ type: actionTypes.LOGIN_USER_SUCCESS, result })
         AsyncStorage.setItem('token', result.token)
-        NavigationService.navigate('Products')
+        NavigationService.navigate(routesProducts.PRODUCTS)
     } catch(error) {
         yield put({ type: actionTypes.LOGIN_USER_FAIL, error })
     }
@@ -26,7 +26,6 @@ export function* userSignup({ payload }) {
         AsyncStorage.setItem('token', result.token)
         NavigationService.navigate(routesProducts.PRODUCTS);
     } catch(error) {
-        console.log('error saga', error);
         yield put({ type: actionTypes.SIGNUP_USER_FAIL, error })
     }
 }

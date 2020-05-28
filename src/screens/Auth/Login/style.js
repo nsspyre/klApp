@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '@constants';
 
 export default StyleSheet.create({
     container: {
@@ -27,8 +28,13 @@ export default StyleSheet.create({
         borderRadius: 40,
         fontSize: 18
     },
-    passwordText: {
-        alignSelf: 'flex-end'
+    forgotPassword: {
+        alignSelf: 'center',
+        padding: 10,
+    },
+    forgotPasswordText: {
+        color: colors.ORANGE,
+        fontWeight: 'bold',
     },
     btnHolder: {
         marginVertical: 10

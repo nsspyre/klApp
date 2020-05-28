@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
   Text,
-  Button as NaviteButton,
+  TouchableOpacity,
   View,
   Image,
   ActivityIndicator
@@ -17,7 +17,7 @@ import loginSchema from './schema';
 import { NavigationService } from '@services';
 import { routesAuth as routes } from '@constants';
 
-class Login extends Component {
+class Login extends PureComponent {
   onSubmit = values => {
     const { userLogin } = this.props;
     userLogin(values);
@@ -42,7 +42,7 @@ class Login extends Component {
         <>
           <Formik
             initialValues={{
-              username: '',
+              email: '',
               password: ''
             }}
             validationSchema={loginSchema}
@@ -52,51 +52,38 @@ class Login extends Component {
               <View style={styles.form}>
                 <Input
                   value={props.values.username}
-                  onChangeText={props.handleChange('username')}
-                  onBlur={props.handleBlur('username')}
+                  onChangeText={props.handleChange('email')}
+                  onBlur={props.handleBlur('email')}
                   autoCapitalize="none"
-                  placeholder="Username"
+                  placeholder="Correo electrónico"
                   error={error && true}
                   caption={error ? error : null}
-                  label="Username"
+                  label="Correo electrónico"
                 />
                 <Input
                   value={props.values.password}
                   onChangeText={props.handleChange('password')}
                   onBlur={props.handleBlur('password')}
                   secureTextEntry
-                  placeholder="Password"
+                  placeholder="Contraseña"
                   error={error && true}
                   caption={error ? error : null}
-                  label="Password"
+                  label="Contraseña"
                 />
-                {/* {error && error !== '' && (
-                  <View>
-                    <Text style={styles.errorText}>Oops! {error}</Text>
-                  </View>
-                )} */}
-                <View>
-                  <Text style={styles.passwordText}>forgot password?</Text>
-                </View>
+                <TouchableOpacity style={styles.forgotPassword}>
+                  <Text style={styles.forgotPasswordText}>Olvidaste tu contraseña?</Text>
+                </TouchableOpacity>
                 <View style={styles.btnHolder}>
                   <Button
                     onPress={props.handleSubmit}
                     text="Login"
+                    disabled={props.dirty && !props.isValid ? true : false}
                   />
                 </View>
                 <View style={styles.btnHolder}>
                   <Button
                     status="basic"
-                    text="Continue as guest"
-                  />
-                </View>
-                <View style={styles.line} />
-                <View style={styles.textHolder}>
-                  <Text style={styles.registerLabel}>
-                    Dont have an account yet?
-                  </Text>
-                  <NaviteButton
-                    title="Signup"
+                    text="Registrarse"
                     onPress={this.goToRegister}
                   />
                 </View>
