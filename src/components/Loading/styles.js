@@ -6,6 +6,10 @@ const styles = StyleSheet.create({
         backgroundColor: colors.ORANGE,
         borderRadius: 4,
         padding: 12
+    },
+    modalBackdrop: {
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 })
 

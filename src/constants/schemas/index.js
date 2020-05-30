@@ -5,6 +5,7 @@ export const USERNAME = Yup.string()
 
 export const EMAIL = Yup.string()
     .email()
+    .min(6)
     .required()
 
 export const PASSWORD = Yup.string()
