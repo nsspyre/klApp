@@ -8,20 +8,22 @@ import styles from './styles';
 const Loading = ({
   show = false,
   fullwidth = false,
-  showBackground = false,
+  control = false,
   size = 'small'
 }) => (
     <>
       {fullwidth ? (
         <Modal isVisible={show}>
-          <View style={showBackground ? styles.container : {}}>
-            <Spinner size={size} status={showBackground ? 'control' : 'warning'} />
+          <View style={control ? styles.container : {}}>
+            <Spinner size={size} status={control ? 'control' : 'warning'} />
           </View>
         </Modal>
       ) : (
-          <View style={showBackground ? styles.container : {}}>
-            <Spinner size={size} status={showBackground ? 'control' : 'warning'} />
-          </View>
+          <Modal isVisible={show} hasBackdrop={false} style={styles.modalBackdrop} animationIn="bounceIn" animationOut="bounceOut">
+            <View style={control ? styles.container : {}}>
+              <Spinner size={size} status={control ? 'control' : 'warning'} />
+            </View>
+          </Modal>
         )}
     </>
   )
