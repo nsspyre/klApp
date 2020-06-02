@@ -8,7 +8,7 @@ import { routesProducts } from '@constants';
 
 export function* userLogin({ payload }) {
     try {
-        const result = yield call(apiCall, 'auth/login', payload, { headers: { 'Content-Type': 'application/json' } }, 'POST')
+        const result = yield call(apiCall, 'auth/login', payload, 'POST')
 
         yield put({ type: actionTypes.LOGIN_USER_SUCCESS, result })
         AsyncStorage.setItem('token', result.token)
@@ -20,9 +20,8 @@ export function* userLogin({ payload }) {
 
 export function* userSignup({ payload }) {
     try {
-        const result = yield call(apiCall, 'auth/signup', payload, { headers: { 'Content-Type': 'application/json' } }, 'POST');
+        const result = yield call(apiCall, 'auth/signup', payload, 'POST');
         yield put({ type: actionTypes.SIGNUP_USER_SUCCESS, result })
-        console.log('result saga', result);
         AsyncStorage.setItem('token', result.token)
         NavigationService.navigate(routesProducts.PRODUCTS);
     } catch(error) {
