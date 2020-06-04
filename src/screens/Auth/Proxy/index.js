@@ -1,23 +1,35 @@
-import React, { useEffect } from 'react';
-import { ActivityIndicator, AsyncStorage, View, StyleSheet } from 'react-native';
+import React, { Component } from 'react';
+import { ActivityIndicator, View, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import { NavigationService } from '@services';
-import { routesProducts, routesAuth } from '@constants';
+import { routesFeed, routesAuth } from '@constants';
 
-export default () => {
-    useEffect(() => {
-        AsyncStorage.getItem('token')
-            .then(token => NavigationService.navigate(token ? routesProducts.PRODUCTS : routesAuth.AUTH));
-    }, [])
+class Proxy extends Component {
+    componentDidMount() {
+        this.init();
+    };
 
-    return (
-        <View style={styles.container}>
-            <ActivityIndicator
-                size="large"
-                color="#F4A018"
-            />
-        </View>
-    )
+    init = async () => {
+        const token = await AsyncStorage.getItem('token');
+
+        if (token) {
+            NavigationService.navigate(routesFeed.FEED);
+        } else {
+            NavigationService.navigate(routesAuth.AUTH);
+        }
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <ActivityIndicator
+                    size="large"
+                    color="#F4A018"
+                />
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
@@ -26,4 +38,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     }
-})
+});
+
+export default Proxy;
