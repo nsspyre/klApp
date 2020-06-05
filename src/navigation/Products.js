@@ -6,6 +6,9 @@ const productsStack = createStackNavigator({
     // [routes.PRODUCTS_HOME]: Products
 }, {
     initialRouteName: routes.PRODUCTS_HOME,
+    defaultNavigationOptions: {
+        header: null,
+    }
 })
 
 export default productsStack;
