@@ -1,24 +1,23 @@
 import { NavigationActions } from 'react-navigation';
 
-const config = {};
+let navigator;
 
-const setNavigator = (nav) => {
-    if (nav) {
-        config.navigator = nav;
+const setTopLevelNavigator = (ref) => {
+    if (ref) {
+        navigator = ref;
     }
+}
+
+const getTopLevelNavigator = () => {
+    return navigator;
 }
 
 const navigate = (routeName, params = {}) => {
-    if (config.navigator && routeName) {
-        config.navigator.dispatch(NavigationActions.navigate({ routeName, params }));
-    }
+    navigator.dispatch(NavigationActions.navigate({ routeName, params }));
 }
 
 const goBack = () => {
-    if (config.navigator) {
-        let action = NavigationActions.back({});
-        config.navigator.dispatch(action);
-    }
+    navigator.dispatch(NavigationActions.back());
 }
 
-export { setNavigator, navigate, goBack };
+export { setTopLevelNavigator, getTopLevelNavigator, navigate, goBack };

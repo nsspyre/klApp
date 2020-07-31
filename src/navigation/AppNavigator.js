@@ -1,15 +1,15 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { routesProxy, routesAuth, routesProducts } from '@constants';
+import { routesProxy, routesAuth, routesFeed } from '@constants';
 
 import Proxy from '@screens/Auth/Proxy';
 import AuthStack from './Auth';
-import ProductsStack from './Products';
+import FeedStack from './Feed';
 
 export default createAppContainer(
     createSwitchNavigator({
         [routesProxy.PROXY]: Proxy,
         [routesAuth.AUTH]: AuthStack,
-        [routesProducts.PRODUCTS]: ProductsStack,
+        [routesFeed.FEED]: FeedStack,
     }, {
         initialRouteName: routesProxy.PROXY
     })
