@@ -5,10 +5,10 @@ import { Text } from 'react-native';
 import styles from './styles';
 
 const Card = (props) => {
-    const { children } = props;
+    const { children, customStyle = {} } = props;
 
     return (
-        <CardComponent style={styles.container}>
+        <CardComponent style={[styles.container, customStyle]}>
             {children}
         </CardComponent>
     )

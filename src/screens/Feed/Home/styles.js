@@ -6,8 +6,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.LAYOUT_GRAY,
         paddingHorizontal: 20,
-        paddingTop: 30,
-        paddingBottom: 60,
     },
     hrContainer: {
         width: '100%',
@@ -16,8 +14,6 @@ const styles = StyleSheet.create({
         marginVertical: 15,
     },
     hrTitle: {
-        fontSize: 18,
-        color: 'gray',
         marginHorizontal: 15,
     },
     hr: {
@@ -64,7 +60,49 @@ const styles = StyleSheet.create({
     },
     cardInfoText: {
         marginBottom: 5,
-    }
+    },
+    overlay: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        opacity: 0.5,
+        backgroundColor: 'black',
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    card: {
+        marginTop: 20,
+    },
+    cardBody: {
+        height: 180,
+        marginBottom: 20,
+        position: 'relative',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    cardImage: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'cover',
+    },
+    overlayInfo: {
+        zIndex: 10,
+        position: 'absolute',
+    },
+    overlayInfoTopLabel: {
+        zIndex: 12,
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: 'white',
+        letterSpacing: 2,
+    },
+    overlayInfoBottomLabel: {
+        zIndex: 12,
+        fontSize: 18,
+        color: 'white'
+    },
 });
 
 export default styles;

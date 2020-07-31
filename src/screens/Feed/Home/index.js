@@ -3,15 +3,17 @@ import * as authSelectors from '@state/selectors/auth.selectors';
 
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { get } from 'lodash';
+import { Text as TextUIK } from '@ui-kitten/components';
 import {
   Text,
   View,
-  FlatList,
   Image,
+  SectionList,
 } from 'react-native';
 
 import Header from './Header';
-import { Card } from '@components';
+import { Card, Button } from '@components';
 import { images } from '@constants';
 import { formatDateTimestamp } from '../../../utils';
 import { getUserFeed } from '@state/actions/feed.actions';
@@ -30,9 +32,7 @@ class Feed extends PureComponent {
 
   renderHRTitle = (text) => (
     <View style={styles.hrContainer}>
-      <View style={styles.hr} />
-      <Text style={styles.hrTitle}>{text}</Text>
-      <View style={styles.hr} />
+      <TextUIK style={styles.hrTitle} category="h5">{text}</TextUIK>
     </View>
   );
 
@@ -69,27 +69,67 @@ class Feed extends PureComponent {
     </Card>
   )
 
+  renderItemHandler = (item, title) => {
+    if (title === 'orders') {
+      return this.renderOrderItem(item);
+    } else {
+      return this.renderRecommendedItem(item);
+    }
+  }
+
+  renderNoContent = () => (
+    <Card customStyle={styles.card}>
+      <View style={styles.cardBody}>
+        <Image style={styles.cardImage} source={images.BOWL} />
+        <View style={styles.overlay} />
+        <View style={styles.overlayInfo}>
+          <Text style={styles.overlayInfoTopLabel}>Ordená ya!!</Text>
+          <Text style={styles.overlayInfoBottomLabel}>Prepará tu primer pedido</Text>
+        </View>
+      </View>
+      <Button text="Ordenar" onPress={() => { }} />
+    </Card>
+  );
+
+  renderHeaderHandler = (section) => {
+    if (section.data.length > 0) {
+      if (section.title === 'orders') {
+        return this.renderHRTitle('Últimos pedidos');
+      } else {
+        return this.renderHRTitle('Recomendados');
+      }
+    } else if (section.title === 'orders') {
+      return this.renderNoContent();
+    }
+  }
+
+  getOrderList = (feed) => {
+    return [
+      {
+        title: 'orders',
+        data: get(feed, 'orders', []),
+      },
+      {
+        title: 'recommended',
+        data: get(feed, 'recommended', []),
+      }
+    ]
+  }
+
   render() {
     const { feed } = this.props;
-    /**
-     * TODO: change flatList for section list!
-     */
+    const feedList = this.getOrderList(feed);
+
     return (
       <View style={styles.container}>
-        {this.renderHRTitle('Últimos pedidos')}
-        {feed && feed.orders && feed.orders.length > 0 && (
-          <FlatList
-            data={feed.orders}
-            renderItem={({ item }) => this.renderOrderItem(item)}
+        {feedList.length > 0 && (
+          <SectionList
+            sections={feedList}
+            renderItem={({ item, section: { title } }) => this.renderItemHandler(item, title)}
             keyExtractor={item => item._id}
-          />
-        )}
-        {this.renderHRTitle('Recomendados')}
-        {feed && feed.recommended && feed.recommended.length > 0 && (
-          <FlatList
-            data={feed.recommended}
-            renderItem={({ item }) => this.renderRecommendedItem(item)}
-            keyExtractor={item => item._id}
+            showsVerticalScrollIndicator={false}
+            renderSectionHeader={({ section }) => this.renderHeaderHandler(section)}
+            stickySectionHeadersEnabled={false}
           />
         )}
       </View>

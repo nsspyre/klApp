@@ -11,6 +11,7 @@ class Proxy extends Component {
     };
 
     init = async () => {
+        // AsyncStorage.removeItem('token');
         const token = await AsyncStorage.getItem('token');
 
         if (token) {
