@@ -26,7 +26,7 @@ class Feed extends PureComponent {
 
   componentDidMount() {
     const { getUserFeed, user } = this.props;
-
+    console.log('this props', this.props);
     getUserFeed(user._id);
   }
 

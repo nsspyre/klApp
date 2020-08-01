@@ -3,7 +3,7 @@ import { routesProxy, routesAuth, routesFeed } from '@constants';
 
 import Proxy from '@screens/Auth/Proxy';
 import AuthStack from './Auth';
-import FeedStack from './Feed';
+import FeedStack from './Orders';
 
 export default createAppContainer(
     createSwitchNavigator({
