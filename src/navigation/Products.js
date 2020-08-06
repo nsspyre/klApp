@@ -1,14 +1,15 @@
-import { createStackNavigator } from 'react-navigation-stack';
+import React from 'react';
 
-import { routesProducts as routes } from '@constants';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const productsStack = createStackNavigator({
-    // [routes.PRODUCTS_HOME]: Products
-}, {
-    initialRouteName: routes.PRODUCTS_HOME,
-    defaultNavigationOptions: {
-        header: null,
-    }
-})
+import Products from '@screens/Orders/Products';
 
-export default productsStack;
+const { Navigator, Screen } = createStackNavigator();
+
+const ProductsStack = () => (
+    <Navigator headerMode="none">
+        <Screen name="Products" component={Products} />
+    </Navigator>
+);
+
+export default ProductsStack;

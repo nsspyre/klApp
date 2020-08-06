@@ -1,15 +1,15 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { routesProxy, routesAuth, routesFeed } from '@constants';
+import { routesProxy, routesAuth, routesHome } from '@constants';
 
 import Proxy from '@screens/Auth/Proxy';
 import AuthStack from './Auth';
-import FeedStack from './Orders';
+import Home from './Home';
 
 export default createAppContainer(
     createSwitchNavigator({
         [routesProxy.PROXY]: Proxy,
         [routesAuth.AUTH]: AuthStack,
-        [routesFeed.FEED]: FeedStack,
+        [routesHome.HOME]: Home,
     }, {
         initialRouteName: routesProxy.PROXY
     })

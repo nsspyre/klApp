@@ -4,7 +4,6 @@ import { colors } from '@constants';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.LAYOUT_GRAY,
         paddingHorizontal: 20,
     },
     hrContainer: {
