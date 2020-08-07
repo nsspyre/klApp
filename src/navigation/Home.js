@@ -47,7 +47,7 @@ const TabNavigator = () => (
     <Navigator initialRouteName="Feed" tabBar={props => <BottomTabBar {...props} />}>
         <Screen name='Feed' component={FeedStack} />
         <Screen name='NewOrder' component={ProductsStack} />
-        <Screen name='Account' key="Account1" component={usertestScreen} />
+        <Screen name='Account' component={usertestScreen} />
     </Navigator>
 );
 

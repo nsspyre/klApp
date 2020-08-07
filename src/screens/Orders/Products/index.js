@@ -9,7 +9,9 @@ import styles from './styles';
 
 class Products extends PureComponent {
     goToOrder = () => {
+        const { navigation } = this.props;
 
+        navigation.navigate('Order');
     }
 
     render() {
