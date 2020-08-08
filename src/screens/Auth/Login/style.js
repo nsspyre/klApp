@@ -5,7 +5,8 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: colors.WHITE,
     },
     imgContainer: {
         padding: 10,

@@ -1,1 +1,9 @@
 export const ARROW_CIRCLE_DOWN = 'arrow-circle-down';
+export const HOME = 'home';
+export const HOME_OUTLINE = 'home-outline';
+export const HASH = 'hash';
+export const PLUS_SQUARE_OUTLINE = 'plus-square-outline';
+export const PLUS_SQUARE = 'plus-square';
+export const PERSON = 'person';
+export const PERSON_OUTLINE = 'person-outline';
+export const CLOCK_OUTLINE = 'clock-outline';

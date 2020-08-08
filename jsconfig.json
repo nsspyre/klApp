@@ -1,0 +1,41 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "baseUrl": ".",
+        "checkJs": false,
+        "paths": {
+            "@assets/*": [
+                "assets/*"
+            ],
+            "@components": [
+                "src/components/index.ts"
+            ],
+            "@constants": [
+                "src/constants/index.ts"
+            ],
+            "@services": [
+                "src/services/index.ts"
+            ],
+            "@screens/*": [
+                "src/screens/*"
+            ],
+            "@icons": [
+                "src/icons/index.ts"
+            ],
+            "@navigation": [
+                "src/navigation/index.ts"
+            ],
+            "@state/*": [
+                "src/state/*"
+            ],
+            "@utils": [
+                "src/utils/index.ts"
+            ]
+        }
+    },
+    "include": ["src/**/*"],
+    "exclude": [
+        "node_modules",
+        "babel.config.js"
+    ]
+}

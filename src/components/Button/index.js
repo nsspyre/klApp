@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@ui-kitten/components';
 
 export default (props) => {
-    const { text, onPress, status = 'warning', appearance = 'filled' } = props;
+    const { text, onPress, status = 'primary', appearance = 'filled' } = props;
 
     return (
         <Button

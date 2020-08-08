@@ -12,7 +12,6 @@ import {
   SectionList,
 } from 'react-native';
 
-import Header from './Header';
 import { Card, Button } from '@components';
 import { images } from '@constants';
 import { formatDateTimestamp } from '../../../utils';
@@ -20,13 +19,8 @@ import { getUserFeed } from '@state/actions/feed.actions';
 import styles from './styles';
 
 class Feed extends PureComponent {
-  static navigationOptions = {
-    headerTitle: <Header />,
-  }
-
   componentDidMount() {
     const { getUserFeed, user } = this.props;
-
     getUserFeed(user._id);
   }
 

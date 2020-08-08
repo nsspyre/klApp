@@ -3,7 +3,7 @@ import { ActivityIndicator, View, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import { NavigationService } from '@services';
-import { routesFeed, routesAuth } from '@constants';
+import { routesAuth, routesHome } from '@constants';
 
 class Proxy extends Component {
     componentDidMount() {
@@ -15,7 +15,7 @@ class Proxy extends Component {
         const token = await AsyncStorage.getItem('token');
 
         if (token) {
-            NavigationService.navigate(routesFeed.FEED);
+            NavigationService.navigate(routesHome.HOME);
         } else {
             NavigationService.navigate(routesAuth.AUTH);
         }

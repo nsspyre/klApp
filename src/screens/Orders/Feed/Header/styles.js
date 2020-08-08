@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginHorizontal: 20,
         alignItems: 'center',
+        alignSelf: 'center',
     },
     addressDirection: {
         fontWeight: 'bold',
