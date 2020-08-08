@@ -1,39 +1,67 @@
 import React, { PureComponent } from 'react';
 
-import { View, Text, SafeAreaView } from 'react-native';
+import * as productSelectors from '@state/selectors/products.selectors';
+
+import { View, Text, SafeAreaView, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
-import { CardImage, Icon } from '@components';
-import { images, icons, routesProducts as routes } from '@constants';
+import { CardImage, Icon, Loading } from '@components';
+import { icons, routesProducts as routes } from '@constants';
 import { NavigationService } from '@services';
+import { getProducts } from '@state/actions/product.action';
+
 import styles from './styles';
 
 class Products extends PureComponent {
+    componentDidMount() {
+        const { getProducts } = this.props;
+        getProducts();
+    }
+
     goToOrder = () => NavigationService.navigate(routes.ORDER);
 
+    renderItem = ({ item }) => (
+        <View style={styles.card}>
+            <CardImage image={item.img} overlay onPress={this.goToOrder}>
+                <Text style={styles.cardTitle}>{item.name}</Text>
+            </CardImage>
+            <View style={styles.cardDescriptionSection}>
+                <Icon name={icons.CLOCK_OUTLINE} />
+                <Text style={styles.cardDescription}>20 - 25min</Text>
+                <Text> | </Text>
+                <Text>c{item.price}</Text>
+            </View>
+        </View>
+    )
+
     render() {
+        const { data, isPending } = this.props;
+
         return (
             <SafeAreaView>
                 <View style={styles.container}>
-                    <View style={styles.card}>
-                        <CardImage image={images.BOWL} overlay onPress={this.goToOrder}>
-                            <Text style={styles.cardTitle}>Bowls</Text>
-                        </CardImage>
-                        <View style={styles.cardDescriptionSection}>
-                            <Icon name={icons.CLOCK_OUTLINE} />
-                            <Text style={styles.cardDescription}>20 - 25min</Text>
-                            <Text> | </Text>
-                            <Text>c3500</Text>
-                        </View>
-                    </View>
+                    {data && data.length > 0 && (
+                        <FlatList
+                            data={data}
+                            renderItem={this.renderItem}
+                            keyExtractor={item => item._id}
+                        />
+                    )}
+                    <Loading show={isPending} control />
                 </View>
             </SafeAreaView>
         )
     }
 }
 
-const mapStateToProps = () => ({ });
+const mapStateToProps = (state) => ({
+    isPending: productSelectors.isPending(state),
+    data: productSelectors.getProducts(state),
+    hasError: productSelectors.hasError(state),
+});
 
-const mapDispatchToProps = () => ({})
+const mapDispatchToProps = (dispatch) => ({
+    getProducts: () => dispatch(getProducts()),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
