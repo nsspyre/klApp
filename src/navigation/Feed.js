@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { colors } from '@constants';
+import { colors, routesFeed } from '@constants';
 import Feed from '@screens/Orders/Feed';
 import FeedHeader from '@screens/Orders/Feed/Header';
 
@@ -11,7 +11,7 @@ const { Navigator, Screen } = createStackNavigator();
 
 const FeedStack = () => (
     <Navigator>
-        <Screen name="Feed" component={Feed} options={{
+        <Screen name={routesFeed.FEED} key={routesFeed.FEED} component={Feed} options={{
             headerTitle: () => <FeedHeader />,
             headerStyle: styles.headerStyle,
         }} />

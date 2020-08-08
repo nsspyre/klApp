@@ -1,11 +1,10 @@
 import React from 'react';
 import { StyleSheet, Platform } from 'react-native';
 
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigation, BottomNavigationTab, Layout, Text, Icon as Icon } from '@ui-kitten/components';
 
-import { colors, icons } from '@constants';
+import { colors, icons, routesProducts, routesFeed } from '@constants';
 import FeedStack from './Feed';
 import ProductsStack from './Products';
 
@@ -20,6 +19,13 @@ const usertestScreen = () => (
         <Text category='h4'>Comming soon</Text>
     </Layout>
 );
+
+const HomeRoutes = {
+    [routesFeed.FEED_HOME]: FeedStack,
+    [routesProducts.PRODUCTS_HOME]: ProductsStack,
+    // TODO: remove this route
+    ['USER_TEST_HOME']: usertestScreen,
+}
 
 const BottomTabBar = ({ navigation, state }) => (
     <BottomNavigation
@@ -43,18 +49,14 @@ const BottomTabBar = ({ navigation, state }) => (
     </BottomNavigation>
 );
 
-const TabNavigator = () => (
-    <Navigator initialRouteName="Feed" tabBar={props => <BottomTabBar {...props} />}>
-        <Screen name='Feed' component={FeedStack} />
-        <Screen name='NewOrder' component={ProductsStack} />
-        <Screen name='Account' component={usertestScreen} />
-    </Navigator>
-);
-
 const HomeStack = () => (
-    <NavigationContainer>
-        <TabNavigator />
-    </NavigationContainer>
+    <Navigator initialRouteName="Feed" tabBar={props => <BottomTabBar {...props} />}>
+        {Object.entries({
+            ...HomeRoutes,
+        }).map(([name, component]) =>
+            <Screen name={name} key={name} component={component} />
+        )}
+    </Navigator>
 );
 
 const styles = StyleSheet.create({

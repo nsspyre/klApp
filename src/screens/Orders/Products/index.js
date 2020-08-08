@@ -4,15 +4,12 @@ import { View, Text, SafeAreaView } from 'react-native';
 import { connect } from 'react-redux';
 
 import { CardImage, Icon } from '@components';
-import { images, icons } from '@constants';
+import { images, icons, routesProducts as routes } from '@constants';
+import { NavigationService } from '@services';
 import styles from './styles';
 
 class Products extends PureComponent {
-    goToOrder = () => {
-        const { navigation } = this.props;
-
-        navigation.navigate('Order');
-    }
+    goToOrder = () => NavigationService.navigate(routes.ORDER);
 
     render() {
         return (

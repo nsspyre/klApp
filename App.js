@@ -6,6 +6,7 @@ import { ApplicationProvider, IconRegistry } from '@ui-kitten/components'
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { mapping, light } from "@eva-design/eva";
 import { PersistGate } from 'redux-persist/lib/integration/react';
+import { NavigationContainer } from '@react-navigation/native';
 import moment from 'moment';
 import 'moment/locale/es';
 
@@ -24,7 +25,9 @@ export default class App extends React.Component {
         <StatusBar barStyle='dark-content' />
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <AppContainer ref={nav => NavigationService.setTopLevelNavigator(nav)} />
+            <NavigationContainer ref={nav => NavigationService.setTopLevelNavigator(nav)}>
+              <AppContainer />
+            </NavigationContainer>
             <IconRegistry icons={EvaIconsPack} />
           </PersistGate>
         </Provider>
