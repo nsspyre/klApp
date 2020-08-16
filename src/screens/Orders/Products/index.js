@@ -18,11 +18,11 @@ class Products extends PureComponent {
         getProducts();
     }
 
-    goToOrder = () => NavigationService.navigate(routes.ORDER);
+    goToOrder = (productOptions) => NavigationService.navigate(routes.ORDER, { productOptions });
 
     renderItem = ({ item }) => (
         <View style={styles.card}>
-            <CardImage image={item.img} overlay onPress={this.goToOrder}>
+            <CardImage image={item.img} overlay onPress={() => this.goToOrder(item.options)}>
                 <Text style={styles.cardTitle}>{item.name}</Text>
             </CardImage>
             <View style={styles.cardDescriptionSection}>
