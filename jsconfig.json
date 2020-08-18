@@ -8,28 +8,28 @@
                 "assets/*"
             ],
             "@components": [
-                "src/components/index.ts"
+                "src/components/index.js"
             ],
             "@constants": [
-                "src/constants/index.ts"
+                "src/constants/index.js"
             ],
             "@services": [
-                "src/services/index.ts"
+                "src/services/index.js"
             ],
             "@screens/*": [
                 "src/screens/*"
             ],
             "@icons": [
-                "src/icons/index.ts"
+                "src/icons/index.js"
             ],
             "@navigation": [
-                "src/navigation/index.ts"
+                "src/navigation/index.js"
             ],
             "@state/*": [
                 "src/state/*"
             ],
             "@utils": [
-                "src/utils/index.ts"
+                "src/utils/index.js"
             ]
         }
     },

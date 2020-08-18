@@ -15,6 +15,7 @@ module.exports = {
           '@services': './src/services/',
           '@screens': './src/screens/',
           '@state': './src/state/',
+          '@utils': './src/utils/index.js',
         },
       },
     ],

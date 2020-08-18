@@ -9,6 +9,7 @@ import { CardImage, Icon, Loading } from '@components';
 import { icons, routesProducts as routes } from '@constants';
 import { NavigationService } from '@services';
 import { getProducts } from '@state/actions/product.action';
+import { setCurrentOrder } from '@state/actions/order.action';
 
 import styles from './styles';
 
@@ -18,11 +19,16 @@ class Products extends PureComponent {
         getProducts();
     }
 
-    goToOrder = (productOptions) => NavigationService.navigate(routes.ORDER, { productOptions });
+    goToOrder = (item) => {
+        const { setCurrentOrder } = this.props;
+        const { name, img, description, options } = item;
+        setCurrentOrder(item);
+        NavigationService.navigate(routes.ORDER, { productOptions: options, product: { name, img, description } });
+    }
 
     renderItem = ({ item }) => (
         <View style={styles.card}>
-            <CardImage image={item.img} overlay onPress={() => this.goToOrder(item.options)}>
+            <CardImage image={item.img} overlay onPress={() => this.goToOrder(item)}>
                 <Text style={styles.cardTitle}>{item.name}</Text>
             </CardImage>
             <View style={styles.cardDescriptionSection}>
@@ -62,6 +68,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     getProducts: () => dispatch(getProducts()),
-})
+    setCurrentOrder: (order) => dispatch(setCurrentOrder(order)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

@@ -7,3 +7,4 @@ export const PLUS_SQUARE = 'plus-square';
 export const PERSON = 'person';
 export const PERSON_OUTLINE = 'person-outline';
 export const CLOCK_OUTLINE = 'clock-outline';
+export const ARROW_BACK = 'arrow-back';

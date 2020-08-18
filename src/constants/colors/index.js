@@ -3,3 +3,4 @@ export const BLACK = '#000000';
 export const WHITE = '#FFFFFF';
 export const LIGHT_GRAY = '#D3D3D3';
 export const LAYOUT_GRAY = '#ECEFF3';
+export const BLACK_SHADOW = '#000';
