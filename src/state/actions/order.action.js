@@ -15,11 +15,6 @@ export const setSelectedOptions = (payload) => ({
     payload,
 });
 
-export const setSizeSelectedOption = (payload) => ({
-    type: actionTypes.SET_SIZE_SELECTED_OPTION,
-    payload,
-});
-
 export const clearSelectedOption = (payload) => ({
     type: actionTypes.CLEAR_SELECTED_OPTION,
     payload,

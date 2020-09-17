@@ -1,17 +1,30 @@
 import React from 'react';
-import { Button } from '@ui-kitten/components';
+import { Button, Text } from '@ui-kitten/components';
 
-export default (props) => {
-    const { text, onPress, status = 'primary', appearance = 'filled' } = props;
+export default ({
+    text,
+    onPress,
+    status = 'primary',
+    appearance = 'filled',
+    customStyle = {},
+    textStyle = {},
+    children,
+}) => {
 
     return (
         <Button
             appearance={appearance}
             status={status}
             onPress={onPress}
-            {...props}
+            style={customStyle}
         >
-            {text}
+            {evaProps => (
+                <>
+                    {children ? children : (
+                        <Text {...evaProps} style={[evaProps.style, textStyle]}>{text}</Text>
+                    )}
+                </>
+            )}
         </Button>
     )
 }

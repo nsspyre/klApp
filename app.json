@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "klApp",
-    "slug": "klApp",
+    "name": "kylApp",
+    "slug": "kylApp",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [

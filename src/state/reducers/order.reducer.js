@@ -22,23 +22,11 @@ export default function (state = initialState, action) {
                 ...state,
                 currentOrder: {
                     ...state.currentOrder,
-                    options: state.currentOrder.options.map((option, i) =>
-                        i === index ? { ...option, selected: option.isMultiple ? [...option.selected, id] : nextSelected } : option)
+                    productOptions: state.currentOrder.productOptions.map((productOption, i) =>
+                        i === index ? { ...productOption, selected: productOption.isMultiple ? [...productOption.selected, id] : nextSelected } : productOption)
                 },
                 pending: false,
             };
-        case actionTypes.SET_SIZE_SELECTED_OPTION:
-            return {
-                ...state,
-                currentOrder: {
-                    ...state.currentOrder,
-                    sizes: {
-                        ...state.currentOrder.sizes,
-                        sizesSelected: action.payload,
-                    }
-                },
-                pending: false,
-            }
         case actionTypes.CLEAR_SELECTED_OPTION:
             const { indexr, idr } = get(action, 'payload', {});
 
@@ -46,8 +34,8 @@ export default function (state = initialState, action) {
                 ...state,
                 currentOrder: {
                     ...state.currentOrder,
-                    options: state.currentOrder.options.map((option, i) =>
-                        i === indexr ? { ...option, selected: remove(option.selected, selected => selected !== idr) } : option)
+                    productOptions: state.currentOrder.productOptions.map((productOption, i) =>
+                        i === indexr ? { ...productOption, selected: remove(productOption.selected, selected => selected !== idr) } : productOption)
                 }
             }
         default:

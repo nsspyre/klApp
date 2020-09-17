@@ -7,9 +7,10 @@ import Accordion from 'react-native-collapsible/Accordion';
 import { View, ScrollView, Image } from 'react-native';
 import { Text, RadioGroup, Radio, CheckBox } from '@ui-kitten/components';
 
-import { getDeviceDimensions } from '@utils';
-import { setSelectedIndexOption, setSelectedOptions, clearSelectedOption, setSizeSelectedOption } from '@state/actions/order.action';
+import { getHeightDeviceDimensions } from '@utils';
+import { setSelectedIndexOption, setSelectedOptions, clearSelectedOption } from '@state/actions/order.action';
 import { colors } from '@constants';
+import { Button } from '@components';
 
 import styles from './styles';
 
@@ -26,7 +27,7 @@ class Order extends PureComponent {
         const { productOptions } = this.props
 
         setTimeout(() => {
-            this.setState({ activeSections: [...Array(productOptions.length + 1).keys()] });
+            this.setState({ activeSections: [...Array(productOptions.length).keys()] });
         }, 0)
     }
 
@@ -48,14 +49,10 @@ class Order extends PureComponent {
         }
     }
 
-    setRadioButtonOption = (nextSelected, index, isSize = false) => {
-        const { setSelectedIndexOption, setSizeSelectedOption } = this.props;
+    setRadioButtonOption = (nextSelected, index) => {
+        const { setSelectedIndexOption } = this.props;
 
-        if (!isSize) {
-            setSelectedIndexOption({ index, nextSelected })
-        } else {
-            setSizeSelectedOption(nextSelected);
-        }
+        setSelectedIndexOption({ index, nextSelected })
     }
 
     renderHeader = section => {
@@ -71,69 +68,44 @@ class Order extends PureComponent {
         );
     };
 
-    renderSizeRadioButtons = (sizes) => (
-        sizes.map(size => (
+    renderRadioButtons = (options) => (
+        options.map(option => (
             <Radio
-                key={size._id}
-                style={styles.sizeRadioButton}
-            >
-                {evaProps => (
-                    <View style={styles.sizeRadioButtonText}>
-                        <Text {...evaProps} style={[evaProps.style]}>{size.size}</Text>
-                        <Text {...evaProps} style={[evaProps.style]}>+c{size.price}</Text>
-                    </View>
-                )}
-            </Radio>
-        ))
-    )
-
-    renderRadioButtons = (ingredients) => (
-        ingredients.map(ingredient => (
-            <Radio
-                key={ingredient._id}
+                key={option._id}
                 style={styles.radioButton}
             >
-                {evaProps => <Text {...evaProps} style={[evaProps.style]}>{ingredient.name}</Text>}
+                {evaProps => <Text {...evaProps} style={[evaProps.style]}>{option.name}</Text>}
             </Radio>
         ))
     )
 
-    renderCheckBoxes = (ingredients, index, selected, maxQuantity) => (
-        ingredients.map(ingredient => (
+    renderCheckBoxes = (options, index, selected, maxQuantity) => (
+        options.map(option => (
             <CheckBox
                 style={styles.checkbox}
-                key={ingredient._id}
-                checked={selected && this.exist(selected, ingredient._id)}
-                disabled={selected.length === maxQuantity && !this.exist(selected, ingredient._id)}
-                onChange={(checked) => this.handleCheckboxPress(checked, index, ingredient._id)}
+                key={option._id}
+                checked={selected && this.exist(selected, option._id)}
+                disabled={selected.length === maxQuantity && !this.exist(selected, option._id)}
+                onChange={(checked) => this.handleCheckboxPress(checked, index, option._id)}
             >
-                {evaProps => <Text {...evaProps} style={[evaProps.style]}>{ingredient.name}</Text>}
+                {evaProps => (
+                    <View style={styles.checkboxTexts}>
+                        <Text {...evaProps} style={[evaProps.style]}>{option.name}</Text>
+                        {option.isExtra && <Text {...evaProps} style={styles.lightFontWeight}>c{option.price}</Text>}
+                    </View>
+                )}
             </CheckBox>
         ))
     )
 
     renderContent = (section, index) => {
-        const { isMultiple, selected, sizesSelected, isSize, maxQuantity } = section;
-
-        if (isSize) {
-            return (
-                <View style={styles.collapseContent}>
-                    <RadioGroup
-                        style={styles.fullWidth}
-                        selectedIndex={sizesSelected}
-                        onChange={nextSelected => this.setRadioButtonOption(nextSelected, null, true)}
-                    >
-                        {this.renderSizeRadioButtons(section.sizes)}
-                    </RadioGroup>
-                </View>
-            )
-        }
+        const { isMultiple, selected, maxQuantity } = section;
 
         return (
             <View style={styles.collapseContent}>
                 {isMultiple ? (
                     <View style={styles.fullWidth}>
-                        {this.renderCheckBoxes(section.ingredients, index, selected, maxQuantity)}
+                        {this.renderCheckBoxes(section.options, index, selected, maxQuantity)}
                     </View>
                 ) : (
                         <RadioGroup
@@ -141,7 +113,7 @@ class Order extends PureComponent {
                             selectedIndex={selected}
                             onChange={nextSelected => this.setRadioButtonOption(nextSelected, index)}
                         >
-                            {this.renderRadioButtons(section.ingredients)}
+                            {this.renderRadioButtons(section.options)}
                         </RadioGroup>
                     )}
             </View>
@@ -151,13 +123,12 @@ class Order extends PureComponent {
     updateSections = activeSections => this.setState({ activeSections });
 
     render() {
-        const { productOptions, product: { img, description, name, sizes } } = this.props;
-        const { height } = getDeviceDimensions(30);
+        const { productOptions, product: { img, description, name } } = this.props;
 
         return (
             <View style={styles.container}>
                 <ScrollView contentContainerStyle={styles.scrollContainer}>
-                    <View style={[styles.topHeader, { height }]}>
+                    <View style={[styles.topHeader, { height: getHeightDeviceDimensions(30) }]}>
                         <View style={styles.imgHolder}>
                             <Image style={styles.img} source={img} />
                             <View style={styles.overlay} />
@@ -169,7 +140,7 @@ class Order extends PureComponent {
                     </View>
                     {productOptions && productOptions.length > 0 && (
                         <Accordion
-                            sections={[...productOptions, ...[sizes]]}
+                            sections={productOptions}
                             activeSections={this.state.activeSections}
                             underlayColor={colors.ORANGE}
                             renderHeader={this.renderHeader}
@@ -181,6 +152,27 @@ class Order extends PureComponent {
                         />
                     )}
                 </ScrollView>
+                <View style={{
+                    width: '100%',
+                    height: '8%',
+                    backgroundColor: 'white',
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    paddingHorizontal: 20,
+                }}>
+                    <Button customStyle={{ width: '100%', paddingVertical: 5 }}>
+                        <View style={{ alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', flex: 1 }}>
+                            <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>Pagar</Text>
+                            <View style={{ borderColor: 'red', borderWidth: 1 }}>
+                                <Text>total: 3500</Text>
+                                <Text>Calorias: 200</Text>
+                            </View>
+                        </View>
+                    </Button>
+                </View>
             </View>
         );
     }
@@ -197,7 +189,6 @@ const mapDispatchToProps = (dispatch) => ({
     setSelectedIndexOption: (data) => dispatch(setSelectedIndexOption(data)),
     setSelectedOptions: (data) => dispatch(setSelectedOptions(data)),
     clearSelectedOption: (data) => dispatch(clearSelectedOption(data)),
-    setSizeSelectedOption: (id) => dispatch(setSizeSelectedOption(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Order);

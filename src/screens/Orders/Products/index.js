@@ -21,9 +21,9 @@ class Products extends PureComponent {
 
     goToOrder = (item) => {
         const { setCurrentOrder } = this.props;
-        const { name, img, description, options } = item;
+        const { name, img, description, productOptions } = item;
         setCurrentOrder(item);
-        NavigationService.navigate(routes.ORDER, { productOptions: options, product: { name, img, description } });
+        NavigationService.navigate(routes.ORDER, { productOptions, product: { name, img, description } });
     }
 
     renderItem = ({ item }) => (

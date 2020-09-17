@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
     },
     scrollContainer: {
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingBottom: '10%',
     },
     collapseHeader: {
         paddingHorizontal: 20,
@@ -79,6 +80,11 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5,
         paddingTop: 15,
     },
+    checkboxTexts: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
     collapseContent: {
         paddingHorizontal: 20,
         paddingVertical: 10,
@@ -90,6 +96,9 @@ const styles = StyleSheet.create({
     },
     collapseContainerStyle: {
         marginBottom: 5,
+    },
+    lightFontWeight: {
+        fontWeight: '300',
     },
 })
 
