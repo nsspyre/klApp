@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     scrollContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        paddingBottom: '10%',
+        paddingBottom: '20%',
     },
     collapseHeader: {
         paddingHorizontal: 20,
@@ -100,6 +100,43 @@ const styles = StyleSheet.create({
     lightFontWeight: {
         fontWeight: '300',
     },
+    paymentSection: {
+        width: '100%',
+        height: '18%',
+        backgroundColor: colors.WHITE,
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        justifyContent: 'space-between',
+        paddingTop: 10,
+        paddingHorizontal: 20,
+        borderTopColor: colors.LIGHT_GRAY,
+        borderTopWidth: 1,
+    },
+    orderInfoRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    topOrderInfoMargin: {
+        marginBottom: 15,
+    },
+    buttonTextHolder: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        position: 'relative',
+    },
+    buttonTextCenter: {
+        fontSize: 20,
+        color: colors.WHITE,
+        fontWeight: 'bold',
+    },
+    buttonTextRight: {
+        color: colors.WHITE,
+        right: 0,
+        position: 'absolute',
+    }
 })
 
 export default styles;

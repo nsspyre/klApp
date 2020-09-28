@@ -5,7 +5,7 @@ import * as orderSelectors from '@state/selectors/orders.selectors';
 import { connect } from 'react-redux';
 import Accordion from 'react-native-collapsible/Accordion';
 import { View, ScrollView, Image } from 'react-native';
-import { Text, RadioGroup, Radio, CheckBox } from '@ui-kitten/components';
+import { Text, RadioGroup, Radio, CheckBox, Divider } from '@ui-kitten/components';
 
 import { getHeightDeviceDimensions } from '@utils';
 import { setSelectedIndexOption, setSelectedOptions, clearSelectedOption } from '@state/actions/order.action';
@@ -152,24 +152,22 @@ class Order extends PureComponent {
                         />
                     )}
                 </ScrollView>
-                <View style={{
-                    width: '100%',
-                    height: '8%',
-                    backgroundColor: 'white',
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    paddingHorizontal: 20,
-                }}>
-                    <Button customStyle={{ width: '100%', paddingVertical: 5 }}>
-                        <View style={{ alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', flex: 1 }}>
-                            <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>Pagar</Text>
-                            <View style={{ borderColor: 'red', borderWidth: 1 }}>
-                                <Text>total: 3500</Text>
-                                <Text>Calorias: 200</Text>
-                            </View>
+                <View style={styles.paymentSection}>
+                    <View style={styles.fullWidth}>
+                        <View style={[styles.orderInfoRow, styles.topOrderInfoMargin]}>
+                            <Text>Calorias</Text>
+                            <Text>500</Text>
+                        </View>
+                        <View style={styles.orderInfoRow}>
+                            <Text>Entrega</Text>
+                            <Text>Gratis</Text>
+                        </View>
+                    </View>
+                    <Divider />
+                    <Button>
+                        <View style={styles.buttonTextHolder}>
+                            <Text style={styles.buttonTextCenter}>Pagar</Text>
+                            <Text style={styles.buttonTextRight}>₡3500</Text>
                         </View>
                     </Button>
                 </View>
