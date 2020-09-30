@@ -82,8 +82,10 @@ const styles = StyleSheet.create({
     },
     checkboxTexts: {
         flex: 1,
+        position: 'relative',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     collapseContent: {
         paddingHorizontal: 20,
@@ -99,6 +101,15 @@ const styles = StyleSheet.create({
     },
     lightFontWeight: {
         fontWeight: '300',
+    },
+    outOfStock: {
+        position: 'absolute',
+        right: 0,
+        fontWeight: '300',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        borderRadius: 28,
+        backgroundColor: colors.WHITE,
     },
     paymentSection: {
         width: '100%',

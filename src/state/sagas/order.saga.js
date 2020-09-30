@@ -2,7 +2,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import { actionTypes } from '@constants';
 
 export function* setCurrentOrder({ payload }) {
-    const { name, price, _id, description, img, productOptions } = payload;
+    const { name, _id, description, img, price, calories, productOptions } = payload;
 
     const currentOrder = {
         name,
@@ -10,13 +10,15 @@ export function* setCurrentOrder({ payload }) {
         _id,
         description,
         img,
+        totalCalories: calories,
         productOptions: productOptions.map(productOption => {
             const isMultiple = productOption.maxQuantity > 1 ? true : false;
+            const { isSize } = productOption;
 
             return {
                 ...productOption,
                 isMultiple,
-                selected: isMultiple ? [] : false,
+                selected: isMultiple ? [] : isSize ? 0 : false,
             }
         })
     }

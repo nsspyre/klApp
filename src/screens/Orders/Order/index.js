@@ -31,13 +31,13 @@ class Order extends PureComponent {
         }, 0)
     }
 
-    handleCheckboxPress = (checked, index, id) => {
+    handleCheckboxPress = (checked, index, id, option = {}) => {
         const { setSelectedOptions, clearSelectedOption } = this.props;
 
         if (checked) {
-            setSelectedOptions({ index, id });
+            setSelectedOptions({ index, id, option });
         } else {
-            clearSelectedOption({ indexr: index, idr: id });
+            clearSelectedOption({ indexr: index, idr: id, optionr: option });
         }
     }
 
@@ -49,10 +49,10 @@ class Order extends PureComponent {
         }
     }
 
-    setRadioButtonOption = (nextSelected, index) => {
+    handleRadioButtonOption = (nextSelected, index, section) => {
         const { setSelectedIndexOption } = this.props;
 
-        setSelectedIndexOption({ index, nextSelected })
+        setSelectedIndexOption({ index, nextSelected, option: section.options[nextSelected] })
     }
 
     renderHeader = section => {
@@ -85,13 +85,14 @@ class Order extends PureComponent {
                 style={styles.checkbox}
                 key={option._id}
                 checked={selected && this.exist(selected, option._id)}
-                disabled={selected.length === maxQuantity && !this.exist(selected, option._id)}
-                onChange={(checked) => this.handleCheckboxPress(checked, index, option._id)}
+                disabled={(selected.length === maxQuantity && !this.exist(selected, option._id) || !option.onStock)}
+                onChange={(checked) => this.handleCheckboxPress(checked, index, option._id, option)}
             >
                 {evaProps => (
                     <View style={styles.checkboxTexts}>
                         <Text {...evaProps} style={[evaProps.style]}>{option.name}</Text>
-                        {option.isExtra && <Text {...evaProps} style={styles.lightFontWeight}>c{option.price}</Text>}
+                        {option.isExtra && option.onStock && <Text {...evaProps} style={styles.lightFontWeight}>¢{option.price}</Text>}
+                        {!option.onStock && <View style={styles.outOfStock}><Text {...evaProps} style={styles.lightFontWeight}>Agotado</Text></View>}
                     </View>
                 )}
             </CheckBox>
@@ -111,7 +112,7 @@ class Order extends PureComponent {
                         <RadioGroup
                             style={styles.fullWidth}
                             selectedIndex={selected}
-                            onChange={nextSelected => this.setRadioButtonOption(nextSelected, index)}
+                            onChange={nextSelected => this.handleRadioButtonOption(nextSelected, index, section)}
                         >
                             {this.renderRadioButtons(section.options)}
                         </RadioGroup>
@@ -123,7 +124,7 @@ class Order extends PureComponent {
     updateSections = activeSections => this.setState({ activeSections });
 
     render() {
-        const { productOptions, product: { img, description, name } } = this.props;
+        const { productOptions, product: { img, description, name }, totalPrice, totalCalories } = this.props;
 
         return (
             <View style={styles.container}>
@@ -156,7 +157,7 @@ class Order extends PureComponent {
                     <View style={styles.fullWidth}>
                         <View style={[styles.orderInfoRow, styles.topOrderInfoMargin]}>
                             <Text>Calorias</Text>
-                            <Text>500</Text>
+                            <Text>{totalCalories}</Text>
                         </View>
                         <View style={styles.orderInfoRow}>
                             <Text>Entrega</Text>
@@ -167,7 +168,7 @@ class Order extends PureComponent {
                     <Button>
                         <View style={styles.buttonTextHolder}>
                             <Text style={styles.buttonTextCenter}>Pagar</Text>
-                            <Text style={styles.buttonTextRight}>₡3500</Text>
+                            <Text style={styles.buttonTextRight}>₡{totalPrice}</Text>
                         </View>
                     </Button>
                 </View>
@@ -178,9 +179,11 @@ class Order extends PureComponent {
 
 const mapStateToProps = (state) => ({
     isPending: orderSelectors.isPending(state),
-    product: orderSelectors.getCurrentProduct(state),
+    product: orderSelectors.getCurrentOrder(state),
     productOptions: orderSelectors.getCurrentProductOptions(state),
     hasError: orderSelectors.hasError(state),
+    totalPrice: orderSelectors.getTotalPrice(state),
+    totalCalories: orderSelectors.getTotalCalories(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
