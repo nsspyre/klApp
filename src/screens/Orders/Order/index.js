@@ -73,6 +73,7 @@ class Order extends PureComponent {
             <Radio
                 key={option._id}
                 style={styles.radioButton}
+
             >
                 {evaProps => <Text {...evaProps} style={[evaProps.style]}>{option.name}</Text>}
             </Radio>
@@ -113,6 +114,7 @@ class Order extends PureComponent {
                             style={styles.fullWidth}
                             selectedIndex={selected}
                             onChange={nextSelected => this.handleRadioButtonOption(nextSelected, index, section)}
+                            // onChange={nextSelected => }
                         >
                             {this.renderRadioButtons(section.options)}
                         </RadioGroup>
