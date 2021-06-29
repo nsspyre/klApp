@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { Text } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import { connect } from 'react-redux';
@@ -22,7 +22,7 @@ class Register extends PureComponent {
 
     render() {
         return (
-            <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.container}>
                 <View style={styles.header}>
                     <Button
                         onPress={this.goToLogin}
@@ -80,7 +80,7 @@ class Register extends PureComponent {
                         </View>
                     )}
                 </Formik>
-            </View>
+            </ScrollView>
         )
     }
 }

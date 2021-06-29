@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://kl.nsspyre.now.sh/api/';
+const baseURL = 'https://kl-nsspyre.vercel.app/api/';
 const baseURLdev = 'https://localhost:3000/api/';
 
 export async function apiCall (url, data, method) {

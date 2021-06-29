@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   View,
   Image,
+  ScrollView
 } from 'react-native';
 import { Formik } from 'formik';
 
@@ -87,7 +88,7 @@ class Login extends PureComponent {
     const { loading } = this.props;
 
     return (
-      <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.imgContainer}>
           <Image
             source={require('../../../../assets/imgs/logo.jpeg')}
@@ -96,7 +97,7 @@ class Login extends PureComponent {
         </View>
         {this.renderInputs()}
         <Loading show={loading} control />
-      </View>
+      </ScrollView>
     )
   }
 }

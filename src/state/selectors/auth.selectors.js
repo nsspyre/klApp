@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const isPending = state => get(state, 'auth.pending', false);
 export const error = state => get(state, 'auth.error', null);

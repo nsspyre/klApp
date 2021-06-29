@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, View, StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { NavigationService } from '@services';
 import { routesAuth, routesHome } from '@constants';

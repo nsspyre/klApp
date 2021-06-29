@@ -1,37 +1,41 @@
-import React from 'react';
-import { Provider } from 'react-redux'
+import React from "react";
+import { Provider } from "react-redux";
 
-import { StatusBar } from 'react-native';
-import { ApplicationProvider, IconRegistry } from '@ui-kitten/components'
+import { StatusBar } from "react-native";
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { mapping, light } from "@eva-design/eva";
-import { PersistGate } from 'redux-persist/lib/integration/react';
-import { NavigationContainer } from '@react-navigation/native';
-import moment from 'moment';
-import 'moment/locale/es';
+import { PersistGate } from "redux-persist/lib/integration/react";
+import { NavigationContainer } from "@react-navigation/native";
+import moment from "moment";
+import "moment/locale/es";
 
-import configureStore from '@state/store';
-import { NavigationService } from '@services';
-import AppContainer from './src/navigation/AppNavigator';
-import { default as theme } from './kyl-theme.json';
+import configureStore from "@state/store";
+import { NavigationService } from "@services";
+import AppContainer from "./src/navigation/AppNavigator";
+import { default as theme } from "./kyl-theme.json";
 
 const { store, persistor } = configureStore();
-moment.locale('es');
+moment.locale("es");
 
 export default class App extends React.Component {
   render() {
     return (
-      <ApplicationProvider mapping={mapping} theme={{ ...light, ...theme }}>
-        <StatusBar barStyle='dark-content' />
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <NavigationContainer ref={nav => NavigationService.setTopLevelNavigator(nav)}>
-              <AppContainer />
-            </NavigationContainer>
-            <IconRegistry icons={EvaIconsPack} />
-          </PersistGate>
-        </Provider>
-      </ApplicationProvider>
-    )
+      <>
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider mapping={mapping} theme={{ ...light, ...theme }}>
+          <StatusBar barStyle="dark-content" />
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <NavigationContainer
+                ref={(nav) => NavigationService.setTopLevelNavigator(nav)}
+              >
+                <AppContainer />
+              </NavigationContainer>
+            </PersistGate>
+          </Provider>
+        </ApplicationProvider>
+      </>
+    );
   }
 }

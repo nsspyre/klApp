@@ -3,6 +3,7 @@
         "module": "commonjs",
         "baseUrl": ".",
         "checkJs": false,
+        "target": "es6",
         "paths": {
             "@assets/*": [
                 "assets/*"
